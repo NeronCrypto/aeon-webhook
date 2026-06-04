@@ -51,8 +51,8 @@ const server = http.createServer(async (req, res) => {
       const text = message?.text;
       const chatId = String(message?.chat?.id);
 
-      if (text && chatId === TELEGRAM_CHAT_ID) {
-        console.log(`Message reçu: ${text}`);
+      if (text) {
+        console.log(`Message reçu de chatId: ${chatId}, text: ${text}`);
         const status = await dispatchToGitHub(text, 'telegram');
         console.log(`GitHub dispatch status: ${status}`);
       }
