@@ -4,7 +4,7 @@ const https = require('https');
 const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const GH_TOKEN = process.env.GH_GLOBAL;
-const GH_REPO = process.env.GH_REPO; // "NeronCrypto/aeon-private"
+const GH_REPO = process.env.GH_REPO;
 
 function dispatchToGitHub(message, source) {
   const payload = JSON.stringify({
@@ -71,3 +71,12 @@ const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`Webhook listening on port ${PORT}`);
 });
+
+// Keep-alive ping toutes les 10 minutes
+setInterval(() => {
+  https.get('https://aeon-webhook.onrender.com', (res) => {
+    console.log(`Keep-alive ping: ${res.statusCode}`);
+  }).on('error', (e) => {
+    console.error(`Keep-alive error: ${e.message}`);
+  });
+}, 10 * 60 * 1000);
