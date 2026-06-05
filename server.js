@@ -4,6 +4,7 @@ const https = require('https');
 const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const GH_TOKEN = process.env.GH_GLOBAL;
+console.log(`Token preview: ${GH_TOKEN ? GH_TOKEN.substring(0, 10) : 'UNDEFINED'}`);
 const GH_REPO = process.env.GH_REPO;
 
 function dispatchToGitHub(message, source) {
